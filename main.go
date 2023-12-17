@@ -9,13 +9,14 @@ import (
 	"strings"
 
 	"github.com/fsnotify/fsnotify"
-	// tea "github.com/charmbracelet/bubbletea"
+	// tea "github.com/charmbracelet/bubbletea" //* WIP
 	lg "github.com/charmbracelet/lipgloss"
-	// "github.com/mattn/go-isatty"
+	// "github.com/mattn/go-isatty" //* WIP
 )
 
 var helpStyle = lg.NewStyle().Foreground(lg.Color("241")).Render
 
+//* WIP
 // type model struct {
 // 	filename string
 // 	command string
@@ -24,6 +25,7 @@ var helpStyle = lg.NewStyle().Foreground(lg.Color("241")).Render
 // func (m model) Init() tea.Cmd {}
 // func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {}
 // func (m model) View() string {}
+//* WIP
 
 func exit(str string, code int) {
 	fmt.Printf("Error: %s", str)
