@@ -22,7 +22,9 @@ var helpStyle = lg.NewStyle().Foreground(lg.Color("241")).Render
 // 	command string
 // }
 
-// func (m model) Init() tea.Cmd {}
+// func (m model) Init() tea.Cmd {
+// 	return nil
+// }
 // func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {}
 // func (m model) View() string {}
 //* WIP
@@ -32,7 +34,7 @@ func exit(str string, code int) {
 	os.Exit(code)
 }
 
-func watchFiles(w *fsnotify.Watcher, files []string, cmd string) {
+func watchFiles(w *fsnotify.Watcher, cmd string) {
 	for {
 		select {
 		case err, ok := <-w.Errors:
@@ -43,17 +45,6 @@ func watchFiles(w *fsnotify.Watcher, files []string, cmd string) {
 		case e, ok := <-w.Events:
 			if !ok {
 				return
-			}
-
-			var found bool
-			for _, f := range files {
-				if f == e.Name {
-					found = true
-				}
-			}
-
-			if !found {
-				continue
 			}
 
 			if e.Has(fsnotify.Write) {
@@ -86,7 +77,7 @@ func main() {
 	}
 	defer w.Close()
 
-	go watchFiles(w, files, *cmd)
+	go watchFiles(w, *cmd)
 	for _, p := range files {
 		st, err := os.Lstat(p)
 		if err != nil {
